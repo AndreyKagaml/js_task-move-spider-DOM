@@ -5,7 +5,6 @@ document.addEventListener('click', (e) => {
   const spider = document.querySelector('.spider');
   const wallRect = wall.getBoundingClientRect();
 
-
   if (wall && spider) {
     const borderStartX = wallRect.left + wall.clientLeft;
     const borderStartY = wallRect.top + wall.clientTop;
@@ -13,7 +12,9 @@ document.addEventListener('click', (e) => {
     const borderEndX = borderStartX + wall.clientWidth;
     const borderEndY = borderStartY + wall.clientHeight;
 
-    const midSpider = spider.clientHeight / 2;
+    const midYSpider = spider.clientHeight / 2;
+    const midXSpider = spider.clientWidth / 2;
+
     const currentX = e.clientX;
     const currentY = e.clientY;
 
@@ -23,22 +24,22 @@ document.addEventListener('click', (e) => {
       currentY >= borderStartY &&
       currentY <= borderEndY
     ) {
-      let setX = currentX - borderStartX - midSpider;
-      let setY = currentY - borderStartY - midSpider;
+      let setX = currentX - borderStartX - midXSpider;
+      let setY = currentY - borderStartY - midYSpider;
 
-      if (currentX >= borderEndX - midSpider) {
+      if (currentX >= borderEndX - midXSpider) {
         setX = wall.clientWidth - spider.clientWidth;
       }
 
-      if (currentX <= borderStartX + midSpider) {
+      if (currentX <= borderStartX + midXSpider) {
         setX = 0;
       }
 
-      if (currentY >= borderEndY - midSpider) {
+      if (currentY >= borderEndY - midYSpider) {
         setY = wall.clientHeight - spider.clientHeight;
       }
 
-      if (currentY <= borderStartY + midSpider) {
+      if (currentY <= borderStartY + midYSpider) {
         setY = 0;
       }
 
