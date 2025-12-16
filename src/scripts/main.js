@@ -12,39 +12,36 @@ document.addEventListener('click', (e) => {
     const borderEndY = borderStartY + wall.clientHeight;
 
     const midSpider = spider.clientHeight / 2;
+    const currentX = e.x;
+    const currentY = e.y;
 
-    wall.addEventListener('mousemove', (ev) => {
-      const currentX = ev.x;
-      const currentY = ev.y;
+    if (
+      currentX >= borderStartX &&
+      currentX <= borderEndX &&
+      currentY >= borderStartY &&
+      currentY <= borderEndY
+    ) {
+      let setX = currentX - borderStartX - midSpider;
+      let setY = currentY - borderStartY - midSpider;
 
-      if (
-        currentX >= borderStartX &&
-        currentX <= borderEndX &&
-        currentY >= borderStartY &&
-        currentY <= borderEndY
-      ) {
-        let setX = currentX - borderStartX - midSpider;
-        let setY = currentY - borderStartY - midSpider;
-
-        if (currentX >= borderEndX - midSpider) {
-          setX = wall.clientWidth - spider.clientWidth;
-        }
-
-        if (currentX <= borderStartX + midSpider) {
-          setX = 0;
-        }
-
-        if (currentY >= borderEndY - midSpider) {
-          setY = wall.clientHeight - spider.clientHeight;
-        }
-
-        if (currentY <= borderStartY + midSpider) {
-          setY = 0;
-        }
-
-        spider.style.top = `${setY}px`;
-        spider.style.left = `${setX}px`;
+      if (currentX >= borderEndX - midSpider) {
+        setX = wall.clientWidth - spider.clientWidth;
       }
-    });
+
+      if (currentX <= borderStartX + midSpider) {
+        setX = 0;
+      }
+
+      if (currentY >= borderEndY - midSpider) {
+        setY = wall.clientHeight - spider.clientHeight;
+      }
+
+      if (currentY <= borderStartY + midSpider) {
+        setY = 0;
+      }
+
+      spider.style.top = `${setY}px`;
+      spider.style.left = `${setX}px`;
+    }
   }
 });
